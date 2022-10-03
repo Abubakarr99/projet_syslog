@@ -1,6 +1,8 @@
+.*
+!.gitignore
 */*.pem
 */*.key
-certs/*
+certs/
 private/*
 *.rnd
 openssl.cnf
