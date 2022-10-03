@@ -3,5 +3,5 @@
 certs/*
 private/*
 *.rnd
-*.cnf
+openssl.cnf
 *.csr
