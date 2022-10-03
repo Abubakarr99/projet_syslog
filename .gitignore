@@ -1,0 +1,7 @@
+*/*.pem
+*/*.key
+certs/*
+private/*
+*.rnd
+*.cnf
+*.csr
