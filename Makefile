@@ -18,9 +18,9 @@ network-create:
 
 infra-up: network-create
 	docker-compose -f SP/docker-compose.yaml up -d \
-	docker-compose -f SD/docker-compose.yaml up -d \
-	docker-compose -f SA/docker-compose.yaml up -d \
-	docker-compose -f SL/docker-compose.yaml up -d \
+	&& docker-compose -f SD/docker-compose.yaml up -d \
+	&& docker-compose -f SA/docker-compose.yaml up -d \
+	&& docker-compose -f SL/docker-compose.yaml up -d \
 
 
 
