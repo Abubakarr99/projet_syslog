@@ -14,14 +14,16 @@ getenv=$(env)
 endif
 
 infra-build:
-	docker build -t aboudev/syslog SP/docker/
+	docker-compose  -f SP/docker-compose.yaml build \
+	 && docker-compose  -f SD/docker-compose.yaml build
 docker-push: infra-build
-	docker push aboudev/syslog
+	docker push aboudev/syslog-sp \
+	&& docker push aboudev/syslog-sd
 
 network-create:
 	docker network create --subnet 172.17.2.0/24 sp-sd-network
 
-infra-up:
+infra-up: infra-build
 	docker-compose -f SP/docker-compose.yaml up -d \
 	&& docker-compose -f SD/docker-compose.yaml up -d 
 

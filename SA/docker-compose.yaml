@@ -1,15 +1,13 @@
 version: "3.3"
 services:
   syslogserver:
-    image: aboudev/syslog
+    image: aboudev/syslog-sa
     hostname: SA
+    build: docker
     container_name: SA
     restart: always
     volumes:
       - "/var/log:/var/log"
-    ports:
-      - 516:516
-      - 516:516/udp
     cap_add:
       - SYSLOG
       - NET_ADMIN

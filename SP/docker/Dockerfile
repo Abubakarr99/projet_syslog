@@ -1,7 +1,7 @@
 FROM debian
 RUN apt update && apt install rsyslog rsyslog-gnutls supervisor keepalived -y 
 # Copy keepalived configuration into correct place
-COPY keepalived.conf /etc/keepalived
+COPY keepalived.conf /etc/keepalived/
 WORKDIR /etc/
 RUN mkdir -p /etc/rsyslogTLS
 COPY ./cacert.pem /etc/rsyslogTLS/cacert.pem
