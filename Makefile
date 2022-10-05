@@ -5,6 +5,8 @@ help:
 build: infra-build  ## build docker images
 run: infra-up ## run infrastructure
 network: network-create ## create network
+push: docker-push ## push docker image
+shutdown: docker-down ## shutdown infra
 ifndef env
 getenv=$(error var:"env=" is not set)
 else
@@ -12,15 +14,19 @@ getenv=$(env)
 endif
 
 infra-build:
-	docker build -t aboudev/syslog .
+	docker build -t aboudev/syslog SP/docker/
+docker-push: infra-build
+	docker push aboudev/syslog
+
 network-create:
 	docker network create --subnet 172.17.2.0/24 sp-sd-network
 
-infra-up: network-create
+infra-up:
 	docker-compose -f SP/docker-compose.yaml up -d \
-	&& docker-compose -f SD/docker-compose.yaml up -d \
-	&& docker-compose -f SA/docker-compose.yaml up -d \
-	&& docker-compose -f SL/docker-compose.yaml up -d \
+	&& docker-compose -f SD/docker-compose.yaml up -d 
 
+docker-down: 
+	docker-compose -f SP/docker-compose.yaml down \
+        && docker-compose -f SD/docker-compose.yaml down
 
 

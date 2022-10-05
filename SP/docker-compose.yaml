@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   syslogserver:
-    image: aboudev/syslog-sp
+    image: aboudev/syslog
     hostname: SP
     build: docker
     container_name: SP
