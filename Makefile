@@ -22,7 +22,7 @@ infra-build:
 docker-push: infra-build
 	docker push aboudev/syslog-sp \
 	&& docker push aboudev/syslog-sd \
-	&& docker push aboudev/syslog-sa 
+	&& docker push aboudev/syslog-sa \
 	&& docker push aboudev/syslog-sl 
 
 
