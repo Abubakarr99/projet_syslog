@@ -4,9 +4,9 @@ RUN apt update && apt install rsyslog rsyslog-gnutls supervisor keepalived -y
 COPY keepalived.conf /etc/keepalived/
 WORKDIR /etc/
 RUN mkdir -p /etc/rsyslogTLS
-COPY ./cacert.pem /etc/rsyslogTLS/cacert.pem
-COPY ./server.pem /etc/rsyslogTLS/server.pem
-COPY ./server.key /etc/rsyslogTLS/server.key
+#COPY ./cacert.pem /etc/rsyslogTLS/cacert.pem
+#COPY ./server.pem /etc/rsyslogTLS/server.pem
+#COPY ./server.key /etc/rsyslogTLS/server.key
 RUN echo '$ModLoad imudp \n\
 $UDPServerRun 514 \n\
 $ModLoad imtcp \n\
