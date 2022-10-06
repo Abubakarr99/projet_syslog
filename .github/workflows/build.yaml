@@ -1,0 +1,24 @@
+name: Build and test syslog app
+on:
+  push:
+    branches: *
+  pull_request:
+    branches: *
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to docker hub
+        id: login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: build and push docker images
+        id: build
+        run: make push
+      - name: Run project
+        id: run
+        run: make run
+      - name: shutdown project
+        id: shutdown
+        run: make shutdown
+
