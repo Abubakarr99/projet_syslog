@@ -18,7 +18,7 @@ RUN mkdir -p /var/log/apache2
 
 RUN echo 'ServerName SL' >> /etc/apache2/apache2.conf
 # configure rsyslog
-RUN echo '*.* @@10.1.1.22:514' > /etc/rsyslog.d/loghost.conf
+RUN echo '*.* @@SA:514' > /etc/rsyslog.d/loghost.conf
 # supervisor base configuration
 # this allow running of multiple services 
 ADD keepalived-supervisord.conf /etc/supervisor.conf

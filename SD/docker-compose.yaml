@@ -2,19 +2,23 @@ version: "3.3"
 services:
   syslogserver:
     image: aboudev/syslog-sd
-    hostname: SD
+    hostname: SP
     build: docker
     container_name: SD
     restart: always
     volumes:
       - "/var/log:/var/log"
+    networks:
+      sp-sd-network:
+        ipv4_address: 10.1.1.3
+      backup:
+        ipv4_address: 10.1.3.3
     cap_add:
       - SYSLOG
       - NET_ADMIN
       - NET_BROADCAST
 networks:
-  default:
-    external:
-      name: sp-sd-network
-
-
+  sp-sd-network:
+    external: true
+  backup:
+    external: true

@@ -14,6 +14,15 @@ RUN mkdir -p /var/log/apache2
 #COPY index.php /var/www/html
 
 # configure rsyslog
+# as a server for SL
+RUN echo '$ModLoad imudp \n\
+$UDPServerRun 514 \n\
+$ModLoad imtcp \n\
+$InputTCPServerRun 514 \n\
+$template RemoteStore, "/var/log/remote/%$year%/%$Month%/%$Day%/%$Hour%.log" \n\
+:source, !isequal, "localhost" -?RemoteStore \n\
+:source, isequal, "last" ~ ' > /etc/rsyslog.conf
+# as a client for SP & SD
 RUN echo '*.* @@10.1.1.22:514' > /etc/rsyslog.d/loghost.conf
 # supervisor base configuration
 # this allow running of multiple services 

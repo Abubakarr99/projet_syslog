@@ -8,13 +8,13 @@ services:
     restart: always
     volumes:
       - "/var/log:/var/log"
+    networks:
+      site-local:
+        ipv4_address: 10.1.2.3
     cap_add:
       - SYSLOG
       - NET_ADMIN
       - NET_BROADCAST
 networks:
-  default:
-    external:
-      name: sp-sd-network
-
-
+  site-local:
+    external: true

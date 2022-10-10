@@ -27,7 +27,12 @@ docker-push: infra-build
 
 
 network-create:
-	docker network create --subnet 10.1.1.0/24 sp-sd-network
+	docker network create --subnet 10.1.1.0/24 sp-sd-network \
+	&& docker network create --subnet 10.1.2.0/24 site-local \
+	&& docker network create --subnet 10.1.3.0/24 backup 
+
+
+
 
 infra-up: infra-build
 	docker-compose -f SP/docker-compose.yaml up -d \
@@ -39,6 +44,6 @@ docker-down:
 	docker-compose -f SP/docker-compose.yaml down \
         && docker-compose -f SD/docker-compose.yaml down \
         && docker-compose -f SA/docker-compose.yaml down \
-        && docker-compose -f SA/docker-compose.yaml down
+        && docker-compose -f SL/docker-compose.yaml down
 
 
