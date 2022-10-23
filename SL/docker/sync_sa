@@ -1,0 +1,1 @@
+*/1 * * * *  root rsync -a /var/log/ root@SA:/var/log/SL

@@ -17,13 +17,17 @@ infra-build:
 	docker-compose  -f SP/docker-compose.yaml build \
 	 && docker-compose  -f SD/docker-compose.yaml build \
 	 && docker-compose  -f SA/docker-compose.yaml build \
-	 && docker-compose  -f SL/docker-compose.yaml build 
+	 && docker-compose  -f SL/docker-compose.yaml build \
+	 && docker-compose  -f SM/docker-compose.yaml build \
+	 && docker-compose  -f SB/docker-compose.yaml build 
 
 docker-push: infra-build
 	docker push aboudev/syslog-sp \
 	&& docker push aboudev/syslog-sd \
 	&& docker push aboudev/syslog-sa \
-	&& docker push aboudev/syslog-sl 
+	&& docker push aboudev/syslog-sl \
+	&& docker push aboudev/syslog-sm \
+	&& docker push aboudev/syslog-sb 
 
 
 network-create:
@@ -38,12 +42,16 @@ infra-up: infra-build
 	docker-compose -f SP/docker-compose.yaml up -d \
 	&& docker-compose -f SD/docker-compose.yaml up -d \
 	&& docker-compose -f SA/docker-compose.yaml up -d \
-	&& docker-compose -f SL/docker-compose.yaml up -d 
+	&& docker-compose -f SL/docker-compose.yaml up -d \
+	&& docker-compose -f SM/docker-compose.yaml up -d \
+	&& docker-compose -f SB/docker-compose.yaml up -d 
 
 docker-down: 
 	docker-compose -f SP/docker-compose.yaml down \
         && docker-compose -f SD/docker-compose.yaml down \
         && docker-compose -f SA/docker-compose.yaml down \
-        && docker-compose -f SL/docker-compose.yaml down
+        && docker-compose -f SL/docker-compose.yaml down \
+        && docker-compose -f SM/docker-compose.yaml down \
+        && docker-compose -f SB/docker-compose.yaml down
 
 

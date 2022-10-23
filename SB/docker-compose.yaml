@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  syslogserver:
+    image: aboudev/syslog-sb
+    hostname: SB
+    build: docker
+    container_name: SB
+    restart: always
+    volumes:
+      - "/var/log:/var/log"
+    networks:
+      backup:
+        ipv4_address: 10.1.3.4
+    cap_add:
+      - SYSLOG
+      - NET_ADMIN
+      - NET_BROADCAST
+networks:
+  backup:
+    external: true
+

@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  syslogserver:
+    image: aboudev/syslog-sm
+    hostname: SM
+    build: docker
+    container_name: SM
+    restart: always
+    volumes:
+      - "/var/log:/var/log"
+    networks:
+      sp-sd-network:
+        ipv4_address: 10.1.1.7
+    cap_add:
+      - SYSLOG
+      - NET_ADMIN
+      - NET_BROADCAST
+networks:
+  sp-sd-network:
+    external: true

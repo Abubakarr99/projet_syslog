@@ -1,5 +1,5 @@
 FROM debian
-RUN apt update && apt install rsyslog rsync rsyslog-gnutls supervisor keepalived -y 
+RUN apt update && apt install rsyslog rsync ssh rsyslog-gnutls supervisor keepalived -y 
 # Copy keepalived configuration into correct place
 COPY keepalived.conf /etc/keepalived
 WORKDIR /etc/
@@ -13,6 +13,7 @@ COPY ./server.key /etc/rsyslogTLS/server.key
 COPY logrotate_sa /etc/logrotate.d/logrotate_sa
 COPY logrotate_sl /etc/logrotate.d/logrotate_sl
 
+RUN echo "y\n" | HOSTNAME=`hostname` ssh-keygen -t rsa -C "$HOSTNAME" -f "$HOME/.ssh/id_rsa" -P ""
 # configuration of rsyslog
 RUN echo '$ModLoad imudp \n\
 $UDPServerRun 514 \n\
@@ -34,4 +35,4 @@ CMD ["supervisord", "-c", "/etc/supervisor.conf"]
 EXPOSE 80/tcp
 EXPOSE 514/udp
 EXPOSE 601/tcp
-
+EXPOSE 22/tcp
