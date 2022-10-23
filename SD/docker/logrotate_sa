@@ -1,0 +1,11 @@
+# configure logrotate for SA
+/var/log/remote/SA/* {
+        create 0644 root root
+        rotate 4
+        missingok
+        size 500M
+        dateext
+        dateformat -%d-%m-%Y
+        compress
+        delaycompress
+}

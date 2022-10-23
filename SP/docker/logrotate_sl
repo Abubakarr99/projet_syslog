@@ -1,0 +1,10 @@
+/var/log/remote/SL/* {
+        create 0644 root root
+        rotate 4
+        missingok
+        size 500M
+        dateext
+        dateformat -%d-%m-%Y
+        compress
+        delaycompress
+}
