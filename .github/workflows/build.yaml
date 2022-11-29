@@ -15,15 +15,19 @@ jobs:
         id: login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: build network
+        working-directory: ./POC
         run: make network 
       - name: build and push docker images
         id: build
+        working-directory: ./POC
         run: make push
       - name: Run project
         id: run
+        working-directory: ./POC
         run: make run
       - name: shutdown project
         id: shutdown
+        working-directory: ./POC
         run: make shutdown
 
 
