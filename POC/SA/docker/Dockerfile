@@ -8,9 +8,9 @@ RUN mkdir -p /etc/rsyslogTLS
 RUN mkdir -p /var/log/apache2
 
 # copy certs
-COPY cacert.pem /etc/rsyslogTLS/cacert.pem
-COPY ./SA.pem /etc/rsyslogTLS/SA.pem
-COPY ./SA.key /etc/rsyslogTLS/SA.key
+#COPY cacert.pem /etc/rsyslogTLS/cacert.pem
+#COPY ./SA.pem /etc/rsyslogTLS/SA.pem
+#COPY ./SA.key /etc/rsyslogTLS/SA.key
 
 COPY index.php /var/www/html
 
@@ -18,10 +18,10 @@ COPY index.php /var/www/html
 RUN echo '$IncludeConfig /etc/rsyslog.d/*.conf \n\
 $ModLoad imuxsock.so \n\
 $DefaultNetStreamDriver gtls \n\
-$DefaultNetStreamDriverCAFile /etc/rsyslogTLS/cacert.pem \n\
-$ActionSendStreamDriverMode 1	# run driver in TLS-only mode \n\
-$DefaultNetstreamDriverCertFile /etc/rsyslogTLS/SA.pem \n\
-$DefaultNetstreamDriverKeyFile /etc/rsyslogTLS/SA.key \n\
+#$DefaultNetStreamDriverCAFile /etc/rsyslogTLS/cacert.pem \n\
+#$ActionSendStreamDriverMode 1	# run driver in TLS-only mode \n\
+#$DefaultNetstreamDriverCertFile /etc/rsyslogTLS/SA.pem \n\
+#$DefaultNetstreamDriverKeyFile /etc/rsyslogTLS/SA.key \n\
 $ActionSendStreamDriverAuthMode x509/name \n\
 *.info;mail.none;authpriv.none;cron.none      /var/log/messages \n\
 authpriv.*                                    /var/log/secure \n\

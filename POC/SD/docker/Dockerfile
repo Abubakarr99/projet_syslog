@@ -5,9 +5,9 @@ COPY keepalived.conf /etc/keepalived
 WORKDIR /etc/
 RUN mkdir -p /etc/rsyslogTLS
 # copy of crsyslog certs
-COPY ./cacert.pem /etc/rsyslogTLS/cacert.pem
-COPY ./server.pem /etc/rsyslogTLS/server.pem
-COPY ./server.key /etc/rsyslogTLS/server.key
+#COPY ./cacert.pem /etc/rsyslogTLS/cacert.pem
+#COPY ./server.pem /etc/rsyslogTLS/server.pem
+#COPY ./server.key /etc/rsyslogTLS/server.key
 
 # configuration of logrotate 
 COPY logrotate_sa /etc/logrotate.d/logrotate_sa
@@ -22,9 +22,9 @@ $InputTCPServerRun 601 \n\
 $DefaultNetstreamDriver gtls \n\
 $InputTCPServerStreamDriverMode 1  # run driver in TLS-only mode \n\
 $InputTCPServerStreamDriverAuthMode anon \n\
-$DefaultNetstreamDriverCAFile /etc/rsyslogTLS/cacert.pem \n\
-$DefaultNetstreamDriverCertFile /etc/rsyslogTLS/server.pem \n\
-$DefaultNetstreamDriverKeyFile /etc/rsyslogTLS/server.key \n\
+#$DefaultNetstreamDriverCAFile /etc/rsyslogTLS/cacert.pem \n\
+#$DefaultNetstreamDriverCertFile /etc/rsyslogTLS/server.pem \n\
+#$DefaultNetstreamDriverKeyFile /etc/rsyslogTLS/server.key \n\
 $template remote-incoming-logs,"/var/log/remote/%HOSTNAME%/%PROGRAMNAME%.log" \n\
 *.* ?remote-incoming-logs \n\
 & ~ ' > /etc/rsyslog.conf
